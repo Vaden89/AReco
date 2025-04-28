@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+h1 {
+  @apply sm:text-5xl text-[40px] font-semibold;
+}
+
+input {
+  @apply border-mygray border-[1px] h-9 px-2 rounded-lg;
+}
+
+select {
+  @apply border-mygray border-[1px] h-9 px-2 rounded-lg;
+}
+
+button {
+  cursor: pointer;
+}
+
+@theme {
+  --color-mygray: #b8bfc6;
+  --color-primary: #0f5e5b;
+}
+
+.auth-image {
+  background-image: url("/images/landing-image.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
