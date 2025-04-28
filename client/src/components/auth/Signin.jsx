@@ -29,7 +29,7 @@ export const Signin = () => {
 
   return (
     <div className="w-full flex flex-col my-5">
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full flex flex-col gap-1">
           <label htmlFor="email">Email</label>
           <input

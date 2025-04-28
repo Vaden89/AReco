@@ -45,16 +45,7 @@ export default class AuthController {
 
   static async registerSchool(req, res) {
     try {
-      const { name, email, address, level, establishedYear, logoUrl } =
-        req.body;
-      const school = SchoolService.registerSchool({
-        name,
-        email,
-        address,
-        level,
-        establishedYear,
-        logoUrl,
-      });
+      const school = SchoolService.registerSchool(req.body);
 
       if (!school) {
         return res

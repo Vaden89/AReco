@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const schoolSchema = new mongoose.Schema(
   {
@@ -16,18 +17,15 @@ const schoolSchema = new mongoose.Schema(
       minLength: 8,
       select: false,
     },
+    role: { type: String, default: "school", immutable: true },
     phone: String,
+    address: String,
     establishedYear: { type: Number, required: true },
-    level: { type: String, enum: ["primary", "secondary", "tertiary"] },
+    type: { type: String, enum: ["primary", "secondary", "tertiary"] },
     students: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Student",
       default: [],
-    },
-    address: {
-      city: String,
-      state: String,
-      country: { type: String, default: "Nigeria" },
     },
     logoUrl: String,
     isVerified: Boolean,
@@ -36,5 +34,16 @@ const schoolSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+schoolSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 17);
+  }
+  next();
+});
+
+schoolSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 export const School = mongoose.model("School", schoolSchema);

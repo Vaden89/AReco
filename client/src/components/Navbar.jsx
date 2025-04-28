@@ -63,6 +63,7 @@ const MobileHamburgerMenu = ({ toggleMobileMenu, isMobileMenuOpen }) => {
             {studentMenu.map((item, index) => (
               <NavLink
                 to={`/dashboard${item.link}`}
+                onClick={toggleMobileMenu}
                 key={index}
                 className="text-primary font-medium hover:bg-primary hover:text-white px-3 py-2 rounded-lg cursor-pointer transition-colors"
               >

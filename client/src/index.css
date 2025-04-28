@@ -8,6 +8,21 @@ input {
   @apply border-mygray border-[1px] h-9 px-2 rounded-lg;
 }
 
+input:focus {
+  outline: none;
+  border-color: #0f5e5b;
+  box-shadow: 0 0 0 1px #0f5e5b;
+}
+
+input,
+select {
+  transition: border-color 0.2s ease-in-out;
+}
+
+label {
+  @apply sm:text-sm;
+}
+
 select {
   @apply border-mygray border-[1px] h-9 px-2 rounded-lg;
 }

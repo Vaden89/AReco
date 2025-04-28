@@ -14,7 +14,7 @@ export const Auth = () => {
         securing your documents easier
       </p>
       {isSignIn ? <Signin /> : <Signup />}
-      <div className="w-full flex justify-center gap-1 mt-2 text-black">
+      <div className="w-full flex justify-center gap-1 lg:mt-0 mt-2 text-black">
         <span>
           {isSignIn ? "Don't have an account?" : "Already have an account?"}
         </span>

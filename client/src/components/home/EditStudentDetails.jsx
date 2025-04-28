@@ -60,7 +60,7 @@ const EditStudentDetailsModal = () => {
       <div className="modal-box">
         <h3 className="text-xl font-semibold">Edit student information</h3>
         <form
-          className="mt-5 flex flex-col gap-3"
+          className="mt-5 flex flex-col gap-2"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-1">

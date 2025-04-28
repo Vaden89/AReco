@@ -24,6 +24,12 @@ const studentSchema = new mongoose.Schema(
       minLength: 8,
       select: false,
     },
+    phone: String,
+    address: String,
+    state_of_origin: String,
+    lga: String,
+    dob: String,
+    role: { type: String, default: "student", immutable: true },
     transcripts: {
       type: [String],
       default: [],

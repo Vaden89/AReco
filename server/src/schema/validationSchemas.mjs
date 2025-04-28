@@ -7,33 +7,36 @@ export const loginSchema = Joi.object({
 
 export const registerSchoolSchema = Joi.object({
   name: Joi.string().trim().min(3).required(),
+  phone: Joi.string().trim().required(),
   email: Joi.string().email().required(),
+  establishedYear: Joi.string().integer().required(),
   password: Joi.string()
     .pattern(
       new RegExp(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$"
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
       )
     )
-    .required(),
-  address: Joi.object({
-    city: Joi.string().required(),
-    state: Joi.string().required(),
-    country: Joi.string().required(),
-  }),
+    .required()
+    .messages({
+      "string.pattern.base":
+        "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character (@$!%*?&)",
+    }),
   type: Joi.string().valid("primary", "secondary", "tertiary").required(),
-  establishedYear: Joi.number().integer().required(),
-  logoUrl: Joi.string().required(),
 });
 
 export const registerStudentSchema = Joi.object({
   firstName: Joi.string().trim().required(),
   lastName: Joi.string().trim().required(),
-  email: Joi.string().trim().required(),
+  email: Joi.string().email().required(),
   password: Joi.string()
     .pattern(
       new RegExp(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$"
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
       )
     )
-    .required(),
+    .required()
+    .messages({
+      "string.pattern.base":
+        "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character (@$!%*?&)",
+    }),
 });

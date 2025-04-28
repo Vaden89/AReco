@@ -1,10 +1,26 @@
 "use client";
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
 import { Button } from "../Button";
+import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import * as yup from "yup";
 import { AuthService } from "../../services/auth.service";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const studentRegistrationSchema = yup.object({
+  firstName: yup.string().required("Firstname is required"),
+  lastName: yup.string().required("Lastname is required"),
+  email: yup.string().email().required("Email is required"),
+  password: yup
+    .string()
+    .required()
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Password must contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character"
+    ),
+});
 
 export const StudentForm = ({ back }) => {
   const navigate = useNavigate();
@@ -13,7 +29,9 @@ export const StudentForm = ({ back }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(studentRegistrationSchema),
+  });
 
   const onSubmit = async (formData) => {
     setLoading(true);
@@ -29,7 +47,7 @@ export const StudentForm = ({ back }) => {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
       <button onClick={back} className="w-fit flex items-center gap-2">
         <ArrowLeft />
         <span className="text-lg">Back</span>
