@@ -4,7 +4,10 @@ export const Button = ({ loading, children, onClick, className, type }) => {
   return (
     <button
       type={type}
-      className={`${className} flex items-center justify-center gap-2 py-1.5`}
+      disabled={loading}
+      className={`${className} flex items-center justify-center gap-2 py-1.5 ${
+        loading && "opacity-60"
+      }`}
       onClick={onClick}
     >
       {loading && <Spinner />}

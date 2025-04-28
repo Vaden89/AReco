@@ -1,8 +1,10 @@
 "use client";
-import { Menu, X } from "lucide-react";
-import { studentMenu } from "../resources/menuItems";
 import { useState } from "react";
 import { Button } from "./Button";
+import { NavLink } from "react-router";
+import { Menu, X } from "lucide-react";
+import { studentMenu } from "../resources/menuItems";
+import { useAuth } from "../contexts/AuthProvider";
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,17 +19,29 @@ export const Navbar = () => {
 
       <ul className="hidden sm:flex gap-4">
         {studentMenu.map((item, index) => (
-          <li
+          <NavLink
+            to={`/dashboard${item.link}`}
             className="text-primary font-medium hover:bg-primary hover:text-white px-2 rounded-lg py-1 cursor-pointer transition-colors"
             key={index}
           >
-            {item}
-          </li>
+            {item.title}
+          </NavLink>
         ))}
       </ul>
 
       <Menu className="sm:hidden" onClick={toggleMobileMenu} size={24} />
+      <MobileHamburgerMenu
+        isMobileMenuOpen={isMobileMenuOpen}
+        toggleMobileMenu={toggleMobileMenu}
+      />
+    </nav>
+  );
+};
 
+const MobileHamburgerMenu = ({ toggleMobileMenu, isMobileMenuOpen }) => {
+  const { logout } = useAuth();
+  return (
+    <>
       <div
         className={`fixed inset-0 z-40 transition-opacity duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -47,19 +61,23 @@ export const Navbar = () => {
           </div>
           <ul className="flex flex-col gap-4">
             {studentMenu.map((item, index) => (
-              <li
+              <NavLink
+                to={`/dashboard${item.link}`}
                 key={index}
                 className="text-primary font-medium hover:bg-primary hover:text-white px-3 py-2 rounded-lg cursor-pointer transition-colors"
               >
-                {item}
-              </li>
+                {item.title}
+              </NavLink>
             ))}
           </ul>
-          <Button className="w-full mx-auto bg-red-400 mt-4 text-white font-semibold rounded-lg">
+          <Button
+            onClick={logout}
+            className="w-full mx-auto bg-red-400 mt-4 text-white font-semibold rounded-lg"
+          >
             Logout
           </Button>
         </div>
       </div>
-    </nav>
+    </>
   );
 };

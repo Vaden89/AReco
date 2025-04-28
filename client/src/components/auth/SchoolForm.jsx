@@ -1,15 +1,31 @@
 "use client";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { Button } from "../Button";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { AuthService } from "../../services/auth.service";
 
 export const SchoolForm = ({ back }) => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (formData) => {
+    try {
+      const data = await AuthService.registerSchool(formData);
+      console.log(data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
@@ -97,12 +113,13 @@ export const SchoolForm = ({ back }) => {
           </span>
         )}
       </div>
-      <button
+      <Button
         type="submit"
+        loading={loading}
         className="py-1.5 w-full bg-primary text-white rounded-xl mt-4"
       >
         Create Account
-      </button>
+      </Button>
     </form>
   );
 };

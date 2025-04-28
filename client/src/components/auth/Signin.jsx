@@ -1,15 +1,31 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Button } from "../Button";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { AuthService } from "../../services/auth.service";
 
 export const Signin = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (formData) => {
+    setLoading(true);
+    try {
+      const data = await AuthService.authenticate(formData);
+      console.log(data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full flex flex-col my-5">
@@ -46,6 +62,7 @@ export const Signin = () => {
 
         <Button
           type="submit"
+          loading={loading}
           className="w-full bg-primary text-white rounded-xl mt-4"
         >
           Login
