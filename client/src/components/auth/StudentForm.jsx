@@ -56,6 +56,7 @@ export const StudentForm = ({ back }) => {
         <label htmlFor="firstName">Firstname</label>
         <input
           id="firstName"
+          clas
           placeholder="Enter your first name"
           {...register("firstName", { required: true })}
         />

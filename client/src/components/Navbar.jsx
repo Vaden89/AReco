@@ -1,13 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import { NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
-import { studentMenu } from "../resources/menuItems";
+import { schoolMenu, studentMenu } from "../resources/menuItems";
 import { useAuth } from "../contexts/AuthProvider";
 
 export const Navbar = () => {
+  const { user } = useAuth();
+  const [menu, setMenu] = useState(studentMenu);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (user.role === "school") {
+      setMenu(schoolMenu);
+    }
+  }, [user.role]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -18,7 +26,7 @@ export const Navbar = () => {
       <span className="text-2xl font-semibold">Dashboard</span>
 
       <ul className="hidden sm:flex gap-4">
-        {studentMenu.map((item, index) => (
+        {menu.map((item, index) => (
           <NavLink
             to={`/dashboard${item.link}`}
             className="text-primary font-medium hover:bg-primary hover:text-white px-2 rounded-lg py-1 cursor-pointer transition-colors"
@@ -31,6 +39,7 @@ export const Navbar = () => {
 
       <Menu className="sm:hidden" onClick={toggleMobileMenu} size={24} />
       <MobileHamburgerMenu
+        menu={menu}
         isMobileMenuOpen={isMobileMenuOpen}
         toggleMobileMenu={toggleMobileMenu}
       />
@@ -38,7 +47,7 @@ export const Navbar = () => {
   );
 };
 
-const MobileHamburgerMenu = ({ toggleMobileMenu, isMobileMenuOpen }) => {
+const MobileHamburgerMenu = ({ toggleMobileMenu, isMobileMenuOpen, menu }) => {
   const { logout } = useAuth();
   return (
     <>
@@ -60,7 +69,7 @@ const MobileHamburgerMenu = ({ toggleMobileMenu, isMobileMenuOpen }) => {
             <X onClick={toggleMobileMenu} />
           </div>
           <ul className="flex flex-col gap-4">
-            {studentMenu.map((item, index) => (
+            {menu.map((item, index) => (
               <NavLink
                 to={`/dashboard${item.link}`}
                 onClick={toggleMobileMenu}

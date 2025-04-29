@@ -6,6 +6,7 @@ import HomePage from "./pages/Home";
 import { AuthProvider } from "./contexts/AuthProvider";
 import TranscriptPage from "./pages/Transcripts";
 import SchoolsPage from "./pages/Schools";
+import StudentPage from "./pages/Students";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="transcripts" element={<TranscriptPage />} />
         <Route path="schools" element={<SchoolsPage />} />
+        <Route path="students" element={<StudentPage />} />
       </Route>
     </Routes>
   );

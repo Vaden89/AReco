@@ -13,7 +13,7 @@ export const studentMenu = [
   },
 ];
 
-export const instituteMenu = [
+export const schoolMenu = [
   {
     title: "Home",
     link: "/",

@@ -5,14 +5,16 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext({
   user: {},
+  logout: () => {},
   isAuthenticated: false,
   setIsAuthenticated: () => {},
-  logout: () => {},
 });
 
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    role: "school",
+  });
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const logout = () => {

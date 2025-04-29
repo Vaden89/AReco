@@ -7,7 +7,7 @@ export const Auth = () => {
   const [isSignIn, setIsSignIn] = useState(false);
 
   return (
-    <section className="w-full lg:w-1/2 h-full justify-center items-start flex flex-col sm:p-20 p-5">
+    <section className="w-full lg:w-1/2 2xl:w-1/3 2xl:ml-28 h-full justify-center items-start flex flex-col sm:p-20 p-5">
       <h1>{isSignIn ? "Login" : "Create Account"}</h1>
       <p className="text-mygray font-semibold text-sm sm:mt-2">
         Join us and take control of your academic record, make managing and

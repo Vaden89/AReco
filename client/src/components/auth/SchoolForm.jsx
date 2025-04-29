@@ -56,11 +56,12 @@ export const SchoolForm = ({ back }) => {
         <span className="text-lg">Back</span>
       </button>
       <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-2 lg:gap-2 lg:h-[60vh] lg:overflow-y-auto">
+        <div className="flex flex-col gap-2 lg:gap-2 lg:h-[60vh] 2xl:h-fit lg:overflow-y-auto">
           <div className="w-full flex flex-col gap-1">
             <label htmlFor="name">School name</label>
             <input
               id="name"
+              className="form-input"
               placeholder="Enter your institutes name"
               {...register("name", { required: true })}
             />
@@ -74,6 +75,7 @@ export const SchoolForm = ({ back }) => {
             <label htmlFor="phone">Phone No.</label>
             <input
               id="phone"
+              className="form-input"
               placeholder="Enter your school's phone number"
               {...register("phone", { required: true })}
             />
@@ -87,6 +89,7 @@ export const SchoolForm = ({ back }) => {
             <label htmlFor="email">Email</label>
             <input
               id="email"
+              className="form-input"
               type="email"
               placeholder="Enter your email address"
               {...register("email", { required: true })}
@@ -101,6 +104,7 @@ export const SchoolForm = ({ back }) => {
             <label htmlFor="establishedYear">Established in</label>
             <input
               id="establishedYear"
+              className="form-input"
               placeholder="What year was your school formed"
               {...register("establishedYear", { required: true })}
             />
@@ -129,6 +133,7 @@ export const SchoolForm = ({ back }) => {
             <input
               id="password"
               type="password"
+              className="form-input"
               {...register("password", { required: true })}
             />
             {errors.password && (
@@ -141,7 +146,7 @@ export const SchoolForm = ({ back }) => {
         <Button
           type="submit"
           loading={loading}
-          className="py-1.5 w-full bg-primary text-white rounded-xl mt-4"
+          className="py-1.5 2xl:py-2.5 w-full bg-primary text-white rounded-xl mt-4"
         >
           Create Account
         </Button>
