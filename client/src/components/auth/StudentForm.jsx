@@ -56,7 +56,7 @@ export const StudentForm = ({ back }) => {
         <label htmlFor="firstName">Firstname</label>
         <input
           id="firstName"
-          clas
+          className="form-input"
           placeholder="Enter your first name"
           {...register("firstName", { required: true })}
         />
@@ -70,6 +70,7 @@ export const StudentForm = ({ back }) => {
         <label htmlFor="lastName">Lastname</label>
         <input
           id="lastName"
+          className="form-input"
           placeholder="Enter your last name"
           {...register("lastName", { required: true })}
         />
@@ -84,6 +85,7 @@ export const StudentForm = ({ back }) => {
         <input
           id="email"
           type="email"
+          className="form-input"
           placeholder="Enter your email address"
           {...register("email", { required: true })}
         />
@@ -98,6 +100,7 @@ export const StudentForm = ({ back }) => {
         <input
           id="password"
           type="password"
+          className="form-input"
           {...register("password", { required: true })}
         />
         {errors.password && (

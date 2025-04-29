@@ -35,6 +35,7 @@ export const Signin = () => {
           <input
             id="email"
             type="email"
+            className="form-input"
             placeholder="Enter your email address"
             {...register("email", { required: "Email is required" })}
           />
@@ -50,6 +51,7 @@ export const Signin = () => {
           <input
             id="password"
             type="password"
+            className="form-input"
             placeholder="Enter your password"
             {...register("password", { required: "Password is required" })}
           />

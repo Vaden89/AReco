@@ -13,7 +13,7 @@ const AuthContext = createContext({
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    role: "school",
+    role: "student",
   });
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 

@@ -8,7 +8,7 @@ input {
   @apply border-mygray border-[1px] h-9 px-2 rounded-lg;
 }
 
-.form-input {
+.form-input:focus {
   outline: none;
   border-color: #0f5e5b;
   box-shadow: 0 0 0 1px #0f5e5b;
