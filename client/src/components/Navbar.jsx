@@ -23,7 +23,7 @@ export const Navbar = () => {
 
   return (
     <nav className="w-full h-14 flex items-center justify-between px-8 lg:px-20 shadow-sm relative">
-      <span className="text-2xl font-semibold">Dashboard</span>
+      <span className="text-2xl font-semibold text-primary">AReco</span>
 
       <ul className="hidden sm:flex gap-4">
         {menu.map((item, index) => (

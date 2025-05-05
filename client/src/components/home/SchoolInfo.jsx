@@ -1,9 +1,11 @@
+import { EditSchoolDetails } from "./EditSchoolDetails";
+
 export const SchoolInfo = () => {
   return (
-    <div className="w-full grid grid-cols-2 gap-4">
+    <div className="w-full h-fit grid grid-cols-2 gap-4">
       <div className="flex flex-col">
         <span className="text-primary font-medium text-sm">School name</span>
-        <span>American International college</span>
+        <span className="truncate">American International college</span>
       </div>
       <div className="flex flex-col">
         <span className="text-primary font-medium text-sm">Type</span>
@@ -40,6 +42,7 @@ export const SchoolInfo = () => {
         <span className="text-primary font-medium text-sm">Established In</span>
         <span className="truncate">2006</span>
       </div>
+      <EditSchoolDetails className="hidden sm:flex" />
     </div>
   );
 };

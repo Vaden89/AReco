@@ -5,7 +5,7 @@ export const Button = ({ loading, children, onClick, className, type }) => {
     <button
       type={type}
       disabled={loading}
-      className={`${className} flex items-center justify-center gap-2 py-1.5 ${
+      className={`${className} flex items-center justify-center gap-2 py-1.5 px-2 ${
         loading && "opacity-60"
       }`}
       onClick={onClick}

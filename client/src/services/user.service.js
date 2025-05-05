@@ -11,4 +11,9 @@ export class UserService {
     const { data } = api.post(endpoints.user.editStudentDetails, payload);
     return data;
   }
+
+  static async editSchoolDetails(payload) {
+    const { data } = api.post(endpoints.user.editSchoolDetails, payload);
+    return data;
+  }
 }

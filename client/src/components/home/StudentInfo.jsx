@@ -1,3 +1,4 @@
+import { AddTranscriptBtn } from "../students/AddTranscriptBtn";
 import { EditStudentDetails } from "./EditStudentDetails";
 
 export const StudentInfo = () => {
@@ -49,7 +50,7 @@ export const StudentInfo = () => {
         <span className="text-primary font-medium text-sm">Current school</span>
         <span className="truncate">UC Berkley</span>
       </div>
-      <EditStudentDetails className="hidden sm:flex" />
+      <AddTranscriptBtn disabled={true} id={""} />
     </div>
   );
 };

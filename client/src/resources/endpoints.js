@@ -7,5 +7,12 @@ export const endpoints = {
   user: {
     getUser: "/posts",
     editStudentDetails: "/posts",
+    editSchoolDetails: "/posts",
+  },
+  school: {
+    addStudent: "/posts",
+  },
+  misc: {
+    upload: "/posts",
   },
 };

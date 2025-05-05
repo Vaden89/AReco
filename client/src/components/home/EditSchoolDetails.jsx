@@ -1,17 +1,17 @@
-import { useState } from "react";
 import * as yup from "yup";
 import { Button } from "../Button";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { ImageUpload } from "./ImageUpload";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UserService } from "../../services/user.service";
-import { ImageUpload } from "./ImageUpload";
 
-export const EditStudentDetails = ({ className }) => {
+export const EditSchoolDetails = ({ className }) => {
   return (
     <>
       <Button
         onClick={() => {
-          document.getElementById("editDetailsModal")?.showModal();
+          document.getElementById("editSchoolModal")?.showModal();
         }}
         className={`text-white bg-primary py-3 sm:py-1.5 mt-4 sm:mt-0 font-semibold rounded-xl ${className}`}
       >
@@ -23,12 +23,10 @@ export const EditStudentDetails = ({ className }) => {
   );
 };
 
-const studentDetailsSchema = yup.object({
+const schoolDetailsSchema = yup.object({
   address: yup.string().required("Address is required"),
   phone: yup.string().required("Phone number is required"),
-  state_of_origin: yup.string().required("State of origin is required"),
-  lga: yup.string().required("Lga is required"),
-  dob: yup.string().required("Data of birth is required"),
+  state: yup.string().required("State is required"),
 });
 
 const EditStudentDetailsModal = () => {
@@ -39,14 +37,14 @@ const EditStudentDetailsModal = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(studentDetailsSchema),
+    resolver: yupResolver(schoolDetailsSchema),
   });
 
   const onSubmit = async (formData) => {
     setLoading(true);
     try {
-      const data = await UserService.editStudentDetails(formData);
-      document.getElementById("editDetailsModal")?.close();
+      const data = await UserService.editSchoolDetails(formData);
+      document.getElementById("editSchoolModal")?.close();
       console.log(data);
       reset();
     } catch (error) {
@@ -57,16 +55,16 @@ const EditStudentDetailsModal = () => {
   };
 
   return (
-    <dialog id="editDetailsModal" className="modal">
+    <dialog id="editSchoolModal" className="modal">
       <div className="modal-box">
-        <h3 className="text-xl font-semibold">Edit student information</h3>
-        <ImageUpload />
+        <h3 className="text-xl font-semibold">Edit school information</h3>
+        <ImageUpload setLoading={setLoading} />
         <form
           className="mt-5 flex flex-col gap-2"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-1">
-            <label htmlFor="address">Home address</label>
+            <label htmlFor="address">School address</label>
             <input
               {...register("address")}
               placeholder="e.g, David adeleke street "
@@ -87,37 +85,18 @@ const EditStudentDetailsModal = () => {
             )}
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="state_of_origin">State of origin</label>
-            <input {...register("state_of_origin")} placeholder="e.g, Ogun" />
-            {errors.state_of_origin && (
+            <label htmlFor="state">State of origin</label>
+            <input {...register("state")} placeholder="e.g, Lagos" />
+            {errors.state && (
               <span className="text-red-500 text-sm px-1">
-                {errors.state_of_origin.message}
+                {errors.state.message}
               </span>
             )}
           </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="lga">LGA</label>
-            <input {...register("lga")} placeholder="e.g, Shagamu" />
-            {errors.lga && (
-              <span className="text-red-500 text-sm px-1">
-                {errors.lga.message}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="dob">Date of birth</label>
-            <input {...register("dob")} />
-            {errors.dob && (
-              <span className="text-red-500 text-sm px-1">
-                {errors.dob.message}
-              </span>
-            )}
-          </div>
-
           <Button
             type="submit"
             loading={loading}
-            className="bg-primary text-white rounded-xl"
+            className="bg-primary text-white rounded-xl mt-4"
           >
             Save Details
           </Button>

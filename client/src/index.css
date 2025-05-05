@@ -14,6 +14,15 @@ input {
   box-shadow: 0 0 0 1px #0f5e5b;
 }
 
+.input-error,
+.input-error:focus {
+  outline: none;
+  border: 1px;
+  color: #ff0000;
+  border-color: #ff0000;
+  box-shadow: 0 0 0 1px #ff0000;
+}
+
 input,
 select {
   transition: border-color 0.2s ease-in-out;
