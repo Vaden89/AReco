@@ -19,7 +19,9 @@ const schoolSchema = new mongoose.Schema(
     },
     role: { type: String, default: "school", immutable: true },
     phone: String,
+    state: String,
     address: String,
+    logoUrl: String,
     establishedYear: { type: Number, required: true },
     type: { type: String, enum: ["primary", "secondary", "tertiary"] },
     students: {
@@ -27,7 +29,6 @@ const schoolSchema = new mongoose.Schema(
       ref: "Student",
       default: [],
     },
-    logoUrl: String,
     isVerified: Boolean,
     otp: Number,
     otpExpiry: Date,

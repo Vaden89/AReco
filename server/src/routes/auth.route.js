@@ -23,19 +23,8 @@ router.post(
   AuthController.registerSchool
 );
 
-//Login for students
-router.post(
-  "/student-login",
-  validator(loginSchema),
-  AuthController.loginStudent
-);
-
-//Login for schools
-router.post(
-  "/school-login",
-  validator(loginSchema),
-  AuthController.loginStudent
-);
+//Login
+router.post("/login", validator(loginSchema), AuthController.login);
 
 //Verify account
 router.post("/verifyAccount", (req, res) => {});
@@ -50,7 +39,3 @@ router.post("/reset-password", (req, res) => {});
 router.post("/verifyOtp", (req, res) => {});
 
 export default router;
-
-//Let's say I want to verify my account
-//An email is being sent to me, saying verify your account, it would give an otp
-//You would come back to the application and input that otp

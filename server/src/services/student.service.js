@@ -7,26 +7,32 @@ export default class StudentService {
     return await student.save();
   }
 
-  static async studentLogin(payload) {
-    const student = await Student.findOne({ email: payload.email }).select(
-      "+password"
-    );
+  static async editStudentDetails(uid, payload) {
+    try {
+      const student = await Student.findByIdAndUpdate(
+        uid,
+        {
+          phone: payload?.phone,
+          address: payload?.address,
+          lga: payload?.lga,
+          dob: payload?.dob,
+          state_of_origin: payload?.state_of_origin,
+        },
+        {
+          new: true,
+        }
+      );
 
-    if (!student) {
-      return null;
+      if (!student) {
+        return { success: false, error: "Student not found!" };
+      }
+
+      return {
+        success: true,
+        message: "Your details have been updated successfully!",
+      };
+    } catch (error) {
+      return { success: true, error };
     }
-
-    const isPasswordMatch = await student.comparePassword(payload.password);
-
-    if (!isPasswordMatch) {
-      return null;
-    }
-
-    const { password: _, ...studentData } = student.toObject();
-    const token = jwtTokenGenerator(studentData._id);
-    return {
-      studentData,
-      token,
-    };
   }
 }
