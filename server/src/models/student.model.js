@@ -33,6 +33,7 @@ const studentSchema = new mongoose.Schema(
     transcripts: {
       type: [String],
       default: [],
+      select: false,
     },
     attendedSchools: {
       type: [mongoose.Schema.Types.ObjectId],

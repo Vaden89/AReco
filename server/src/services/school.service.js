@@ -61,12 +61,50 @@ export class SchoolService {
         await school.save();
       }
 
+      console.log(school);
+      console.log(student);
+
       return {
         success: true,
         message: "Student added to school successfully.",
       };
     } catch (err) {
       return { success: false, error: err.message };
+    }
+  }
+
+  static async getStudents(uid) {
+    try {
+      const school = await School.findById(uid).populate("students");
+
+      if (!school) {
+        return { success: false, error: "School does not exist" };
+      }
+
+      console.log(school);
+      return { success: true, data: school.students };
+    } catch (error) {
+      return { success: false, error };
+    }
+  }
+
+  static async getStudent(uid, studentId) {
+    try {
+      const school = School.findById(uid);
+
+      if (!school) {
+        return { success: false, error: "School does not exist" };
+      }
+
+      const student = await Student.findById(studentId);
+
+      if (!student) {
+        return { success: false, error: "Student does not exist" };
+      }
+
+      return { success: true, student };
+    } catch (error) {
+      return { success: false, error };
     }
   }
 }

@@ -1,5 +1,4 @@
 import { Student } from "../models/student.model.js";
-import { jwtTokenGenerator } from "../utils/jwtsign.js";
 
 export default class StudentService {
   static async createStudent(payload) {
@@ -33,6 +32,20 @@ export default class StudentService {
       };
     } catch (error) {
       return { success: true, error };
+    }
+  }
+
+  static async getAttendedSchools(uid) {
+    try {
+      const student = await Student.findById(uid).populate("attendedSchools");
+
+      if (!student) {
+        return { success: false, error: "This student does not exist" };
+      }
+
+      return { success: true, data: student.attendedSchools };
+    } catch (err) {
+      return { success: false, error: err.message };
     }
   }
 }
